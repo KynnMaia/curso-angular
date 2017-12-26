@@ -9,7 +9,6 @@ import { Http } from "@angular/http";
 export class ListagemComponent{
 
     fotos: Object[] = [];
-    
     //esse parametro faz um inject automatica;
     constructor(http: Http){
         
