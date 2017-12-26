@@ -32,6 +32,6 @@ export class CadastroComponent{
         //transformando o objeto javascript em texto 
         this.http.post('v1/fotos', JSON.stringify(this.foto), { headers: headers }).subscribe(() => {
             console.log("foto salva com sucesso");
-        });
+        }, erro => console.log(erro));
     }
 }
