@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
-import { Http } from "@angular/http";
+import { FotoService } from "../foto/foto.service";
+import { FotoComponent } from "../foto/foto.component";
+import { concat } from "rxjs/observable/concat";
 
 @Component({
     moduleId: module.id,
@@ -8,17 +10,27 @@ import { Http } from "@angular/http";
 })
 export class ListagemComponent{
 
-    fotos: Object[] = [];
+    fotos: FotoComponent[] = [];
+    service: FotoService;
+
     //esse parametro faz um inject automatica;
-    constructor(http: Http){
+    constructor(service: FotoService){
         
-        http
-        .get('v1/fotos')
-        .map( res => res.json())
-        //res => == function(res)
-        .subscribe(fotos => {
+        this.service = service;
+        this.service.lista().subscribe(fotos => {
             this.fotos = fotos;
-            //console.log(this.fotos);
         }, erro => console.log(erro));
-    }    
+
+    }
+    
+    remove(foto){
+        this.service.remove(foto).
+        subscribe(() => {
+            console.log('foto removida com sucesso');
+            let novasFotos = this.fotos.slice(0);
+            let indice = novasFotos.indexOf(foto);
+            novasFotos.splice(indice, 1);
+            this.fotos = novasFotos;
+        }, erro => console.log(erro));
+    }
 }
