@@ -5,6 +5,7 @@ import { ListagemComponent } from "./listagem/listagem.component";
 const AppRoutes: Routes = [
     { path: '', component: ListagemComponent},
     { path: 'cadastro', component: CadastroComponent},
+    { path: 'cadastro/:id', component: CadastroComponent},
     { path: '**', component: ListagemComponent}
 ];
 

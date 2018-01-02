@@ -12,6 +12,7 @@ export class ListagemComponent{
 
     fotos: FotoComponent[] = [];
     service: FotoService;
+    mensagem: string = '';
 
     //esse parametro faz um inject automatica;
     constructor(service: FotoService){
@@ -31,6 +32,10 @@ export class ListagemComponent{
             let indice = novasFotos.indexOf(foto);
             novasFotos.splice(indice, 1);
             this.fotos = novasFotos;
-        }, erro => console.log(erro));
+            this.mensagem = 'A foto foi removida com sucesso';
+        }, erro => {
+            console.log(erro);
+            this.mensagem = 'não foi possivel excluir a foto';
+        });
     }
 }
