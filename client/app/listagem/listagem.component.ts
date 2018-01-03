@@ -25,8 +25,9 @@ export class ListagemComponent{
     }
     
     remove(foto){
-        this.service.remove(foto).
-        subscribe(() => {
+        this.service
+        .remove(foto)
+        .subscribe(() => {
             console.log('foto removida com sucesso');
             let novasFotos = this.fotos.slice(0);
             let indice = novasFotos.indexOf(foto);
